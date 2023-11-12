@@ -1,13 +1,16 @@
 import styled from "styled-components";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 interface TimerProps {
   time: string;
 }
 
-const Timer: React.FC<TimerProps> = ({ time }) => {
+const Timer: React.FC<TimerProps> = () => {
   const [timerActive, setTimerActive] = useState(false);
+
   const seconds = useRef(0);
+
+  const [time, setTime] = useState("00:00");
 
   const toggleTimer = () => {
     timerActive === true
@@ -15,6 +18,10 @@ const Timer: React.FC<TimerProps> = ({ time }) => {
       : console.log("timer stopped!");
     setTimerActive((prev) => !prev);
   };
+
+  useEffect(() => {
+    startTimer(25);
+  }, [time]);
 
   const startTimer = (length: number) => {
     const startTime = new Date();
@@ -34,7 +41,7 @@ const Timer: React.FC<TimerProps> = ({ time }) => {
 
       seconds.current = roundedTimeDiff;
       // console.log("Seconds since start: ", roundedTimeDiff);
-      formatToTime(seconds.current);
+      setTime(formatToTime(seconds.current));
     }, 1000);
 
     return length;
@@ -61,14 +68,12 @@ const Timer: React.FC<TimerProps> = ({ time }) => {
       formattedSeconds = `${seconds}`;
     }
 
-    console.log(`${formattedMinutes}:${formattedSeconds}`);
+    return `${formattedMinutes}:${formattedSeconds}`;
   }
-
-  startTimer(25);
 
   return (
     <StyledTimer onClick={() => toggleTimer()}>
-      {seconds.current}
+      {time}
       <Typography>Start</Typography>
     </StyledTimer>
   );
