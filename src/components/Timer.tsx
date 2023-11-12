@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 interface TimerProps {
   time: string;
@@ -7,6 +7,7 @@ interface TimerProps {
 
 const Timer: React.FC<TimerProps> = ({ time }) => {
   const [timerActive, setTimerActive] = useState(false);
+  const seconds = useRef(0);
 
   const toggleTimer = () => {
     timerActive === true
@@ -31,18 +32,44 @@ const Timer: React.FC<TimerProps> = ({ time }) => {
         clearInterval(interval);
       }
 
-      console.log("Seconds since start: ", roundedTimeDiff);
+      seconds.current = roundedTimeDiff;
+      // console.log("Seconds since start: ", roundedTimeDiff);
+      formatToTime(seconds.current);
     }, 1000);
 
     return length;
   };
 
+  function formatToTime(number: number) {
+    // let time = "";
+
+    let minutes = Math.floor(number / 60);
+    let seconds = number % 60;
+
+    let formattedMinutes = "";
+    let formattedSeconds = "";
+
+    if (minutes <= 9) {
+      formattedMinutes = `0${minutes}`;
+    } else {
+      formattedMinutes = `${minutes}`;
+    }
+
+    if (seconds <= 9) {
+      formattedSeconds = `0${seconds}`;
+    } else {
+      formattedSeconds = `${seconds}`;
+    }
+
+    console.log(`${formattedMinutes}:${formattedSeconds}`);
+  }
+
   startTimer(25);
 
   return (
     <StyledTimer onClick={() => toggleTimer()}>
-      {time}
-      <Typography>Push To Start</Typography>
+      {seconds.current}
+      <Typography>Start</Typography>
     </StyledTimer>
   );
 };
@@ -72,5 +99,8 @@ const StyledTimer = styled.div`
 
 const Typography = styled.div`
   margin-top: 1rem;
-  font-size: 1rem;
+  font-size: 1.125rem;
+  text-align: center;
+  letter-spacing: 1.15em;
+  text-transform: uppercase;
 `;
