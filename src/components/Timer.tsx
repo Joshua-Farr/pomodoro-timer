@@ -15,7 +15,11 @@ const StyledTimer = styled.div`
   font-weight: 600;
 `;
 
-const Timer = (time: String) => {
+interface TimerProps {
+  time: string;
+}
+
+const Timer: React.FC<TimerProps> = ({ time }) => {
   return (
     <StyledTimer>
       {/* <Typography> */}
