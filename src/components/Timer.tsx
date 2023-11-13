@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useState, useRef, useEffect } from "react";
+import formatToTime from "../FormatToTime";
 
 interface TimerProps {
   time: string;
@@ -7,10 +8,8 @@ interface TimerProps {
 
 const Timer: React.FC<TimerProps> = () => {
   const [timerActive, setTimerActive] = useState(false);
-
-  const seconds = useRef(0);
-
   const [time, setTime] = useState("00:00");
+  const seconds = useRef(0);
 
   const toggleTimer = () => {
     setTimerActive((prev) => !prev);
@@ -37,36 +36,11 @@ const Timer: React.FC<TimerProps> = () => {
       }
 
       seconds.current = roundedTimeDiff;
-      // console.log("Seconds since start: ", roundedTimeDiff);
       setTime(formatToTime(seconds.current));
     }, 1000);
 
     return length;
   };
-
-  function formatToTime(number: number) {
-    // let time = "";
-
-    let minutes = Math.floor(number / 60);
-    let seconds = number % 60;
-
-    let formattedMinutes = "";
-    let formattedSeconds = "";
-
-    if (minutes <= 9) {
-      formattedMinutes = `0${minutes}`;
-    } else {
-      formattedMinutes = `${minutes}`;
-    }
-
-    if (seconds <= 9) {
-      formattedSeconds = `0${seconds}`;
-    } else {
-      formattedSeconds = `${seconds}`;
-    }
-
-    return `${formattedMinutes}:${formattedSeconds}`;
-  }
 
   return (
     <StyledTimer onClick={() => toggleTimer()}>
