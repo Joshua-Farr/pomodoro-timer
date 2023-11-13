@@ -41,6 +41,7 @@ body {
   align-items: center;
   justify-content: center;
   background-color: #1e2140;
+  margin: 0;
 }
 
 /* Set shorter line heights on headings and interactive elements */

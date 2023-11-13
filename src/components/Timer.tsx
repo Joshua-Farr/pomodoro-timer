@@ -13,15 +13,12 @@ const Timer: React.FC<TimerProps> = () => {
   const [time, setTime] = useState("00:00");
 
   const toggleTimer = () => {
-    timerActive === true
-      ? console.log("timer started!")
-      : console.log("timer stopped!");
     setTimerActive((prev) => !prev);
   };
 
   useEffect(() => {
     startTimer(25);
-  }, [time]);
+  }, []);
 
   const startTimer = (length: number) => {
     const startTime = new Date();
@@ -74,7 +71,7 @@ const Timer: React.FC<TimerProps> = () => {
   return (
     <StyledTimer onClick={() => toggleTimer()}>
       {time}
-      <Typography>Start</Typography>
+      <Typography>{timerActive === true ? `Start` : `Pause`}</Typography>
     </StyledTimer>
   );
 };
@@ -105,7 +102,10 @@ const StyledTimer = styled.div`
 const Typography = styled.div`
   margin-top: 1rem;
   font-size: 1.125rem;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   letter-spacing: 1.15em;
   text-transform: uppercase;
+  padding-left: 1.15em;
 `;
