@@ -1,7 +1,7 @@
 import Timer from "./components/Timer";
 
 function App() {
-  const time = "25:00";
+  const time = 25;
   return <Timer time={time} />;
 }
 

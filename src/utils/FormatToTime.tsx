@@ -1,8 +1,8 @@
-export default function formatToTime(number: number) {
+export default function formatToTime(number: number, length: number) {
   // let time = "";
 
-  let minutes = Math.floor(number / 60);
-  let seconds = number % 60;
+  let minutes = length - 1 - Math.floor(number / 60);
+  let seconds = 59 - (number % 60);
 
   let formattedMinutes = "";
   let formattedSeconds = "";

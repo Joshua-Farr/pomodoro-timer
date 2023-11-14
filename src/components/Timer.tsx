@@ -9,7 +9,7 @@ interface TimerProps {
 
 const Timer: React.FC<TimerProps> = () => {
   const [timerActive, setTimerActive] = useState(false);
-  const [time, setTime] = useState("00:00");
+  const [time, setTime] = useState("25:00");
   const seconds = useRef(0);
 
   const toggleTimer = () => {
@@ -17,13 +17,15 @@ const Timer: React.FC<TimerProps> = () => {
   };
 
   useEffect(() => {
-    startTimer(25);
-  }, []);
+    if (timerActive) {
+      startTimer(25);
+    }
+  }, [timerActive]);
 
   const startTimer = (length: number) => {
     const startTime = new Date();
 
-    console.log("Start Time: ", startTime);
+    // console.log("Start Time: ", startTime);
 
     const interval = setInterval(() => {
       const updatedTime = new Date();
@@ -34,10 +36,11 @@ const Timer: React.FC<TimerProps> = () => {
       if (roundedTimeDiff === 1500) {
         //Ending the interval timer
         clearInterval(interval);
+        setTime("00:00");
       }
 
       seconds.current = roundedTimeDiff;
-      setTime(formatToTime(seconds.current));
+      setTime(formatToTime(seconds.current, length));
     }, 1000);
 
     return length;
@@ -49,7 +52,7 @@ const Timer: React.FC<TimerProps> = () => {
       <ModeToggle />
       <StyledTimer onClick={() => toggleTimer()}>
         {time}
-        <Typography>{timerActive === true ? `Start` : `Pause`}</Typography>
+        <Typography>{timerActive === true ? `Pause` : `Start`}</Typography>
       </StyledTimer>
     </TimerWrapper>
   );
