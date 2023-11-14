@@ -42,6 +42,7 @@ body {
   justify-content: center;
   background-color: #1e2140;
   margin: 0;
+  font-family: "Archivo Narrow", sans-serif;
 }
 
 /* Set shorter line heights on headings and interactive elements */

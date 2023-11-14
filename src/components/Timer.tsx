@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useState, useRef, useEffect } from "react";
-import formatToTime from "../FormatToTime";
+import formatToTime from "../utils/FormatToTime";
+import ModeToggle from "./ModeToggle";
 
 interface TimerProps {
   time: string;
@@ -43,14 +44,33 @@ const Timer: React.FC<TimerProps> = () => {
   };
 
   return (
-    <StyledTimer onClick={() => toggleTimer()}>
-      {time}
-      <Typography>{timerActive === true ? `Start` : `Pause`}</Typography>
-    </StyledTimer>
+    <TimerWrapper>
+      <Title>pomodoro</Title>
+      <ModeToggle />
+      <StyledTimer onClick={() => toggleTimer()}>
+        {time}
+        <Typography>{timerActive === true ? `Start` : `Pause`}</Typography>
+      </StyledTimer>
+    </TimerWrapper>
   );
 };
 
 export default Timer;
+
+const TimerWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Title = styled.h1`
+  text-align: center;
+  color: white;
+  margin-bottom: 1em;
+  font-size: 3rem;
+  letter-spacing: 2px;
+`;
 
 const StyledTimer = styled.div`
   border-radius: 50%;
@@ -66,7 +86,7 @@ const StyledTimer = styled.div`
   font-size: 6rem;
   font-weight: 600;
   user-select: none;
-  box-shadow: 0 0 60px 1px #7fff;
+  box-shadow: 0 0 60px 1px #a512;
 
   &:hover {
     cursor: pointer;
