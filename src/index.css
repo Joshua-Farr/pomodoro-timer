@@ -43,6 +43,7 @@ body {
   background-color: #1e2140;
   margin: 0;
   font-family: "Archivo Narrow", sans-serif;
+  user-select: none;
 }
 
 /* Set shorter line heights on headings and interactive elements */

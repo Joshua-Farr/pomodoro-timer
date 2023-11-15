@@ -25,8 +25,6 @@ const Timer: React.FC<TimerProps> = () => {
   const startTimer = (length: number) => {
     const startTime = new Date();
 
-    // console.log("Start Time: ", startTime);
-
     const interval = setInterval(() => {
       const updatedTime = new Date();
       const timeDiff = updatedTime.getTime() - startTime.getTime();

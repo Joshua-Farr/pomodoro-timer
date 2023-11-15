@@ -1,7 +1,7 @@
 import Timer from "./components/Timer";
 import { createContext, useState } from "react";
 
-const TimerContext = createContext<{
+export const TimerContext = createContext<{
   mode: number;
   setMode: React.Dispatch<React.SetStateAction<number>>;
 }>({ mode: 1, setMode: () => {} });

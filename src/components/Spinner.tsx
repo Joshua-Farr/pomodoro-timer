@@ -4,7 +4,7 @@ const StyledSpinner = styled.div`
   background-color: #f7706f;
 `;
 
-const Spinner = (percent: Number) => {
+const Spinner = (percent: number) => {
   return <StyledSpinner></StyledSpinner>;
 };
 
