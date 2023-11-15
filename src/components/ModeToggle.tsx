@@ -1,32 +1,5 @@
 import styled from "styled-components";
-import { useState } from "react";
-
-const StyledToggle = styled.div`
-  color: white;
-  background-color: #151932;
-  width: 350px;
-  height: 50px;
-  margin-bottom: 2em;
-  border-radius: 25px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem 1.5rem;
-  letter-spacing: 2px;
-
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
-const StyledCategory = styled.span`
-  color: #151932;
-  background-color: #f87070;
-  border-radius: 25px;
-  margin: -1.25rem 0;
-  margin-left: -1em;
-  padding: 0.45em 1rem;
-`;
+import { useState, useContext } from "react";
 
 const ModeToggle = () => {
   const [timerState, setTimerState] = useState(1);
@@ -66,3 +39,30 @@ const ModeToggle = () => {
 };
 
 export default ModeToggle;
+
+const StyledToggle = styled.div`
+  color: white;
+  background-color: #151932;
+  width: 350px;
+  height: 50px;
+  margin-bottom: 2em;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  letter-spacing: 2px;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const StyledCategory = styled.span`
+  color: #151932;
+  background-color: #f87070;
+  border-radius: 25px;
+  margin: -1.25rem 0;
+  margin-left: -1em;
+  padding: 0.45em 1rem;
+`;
