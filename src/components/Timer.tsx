@@ -1,7 +1,8 @@
 import styled from "styled-components";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import formatToTime from "../utils/FormatToTime";
 import ModeToggle from "./ModeToggle";
+import { TimerContext } from "../App";
 
 interface TimerProps {
   time: string;
@@ -11,6 +12,7 @@ const Timer: React.FC<TimerProps> = () => {
   const [timerActive, setTimerActive] = useState(false);
   const [time, setTime] = useState("25:00");
   const seconds = useRef(0);
+  const { mode } = useContext(TimerContext);
 
   const toggleTimer = () => {
     setTimerActive((prev) => !prev);
@@ -18,7 +20,18 @@ const Timer: React.FC<TimerProps> = () => {
 
   useEffect(() => {
     if (timerActive) {
-      startTimer(25);
+      let timerMode = 0;
+      if (mode === 1) {
+        timerMode = 25;
+        setTime("25:00");
+      } else if (mode === 2) {
+        timerMode = 5;
+        setTime("5:00");
+      } else {
+        timerMode = 10;
+        setTime("10:00");
+      }
+      startTimer(timerMode);
     }
   }, [timerActive]);
 
