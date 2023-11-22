@@ -20,18 +20,18 @@ const Timer: React.FC<TimerProps> = () => {
 
   useEffect(() => {
     if (timerActive) {
-      let timerMode = 0;
+      let timerLength = 0;
       if (mode === 1) {
-        timerMode = 25;
+        timerLength = 25;
         setTime("25:00");
       } else if (mode === 2) {
-        timerMode = 5;
+        timerLength = 5;
         setTime("5:00");
       } else {
-        timerMode = 10;
+        timerLength = 10;
         setTime("10:00");
       }
-      startTimer(timerMode);
+      startTimer(timerLength);
     }
   }, [timerActive]);
 
