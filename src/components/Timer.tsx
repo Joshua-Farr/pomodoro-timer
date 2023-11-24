@@ -1,39 +1,14 @@
 import styled from "styled-components";
-import { useState, useRef, useEffect, useContext } from "react";
+import { useState, useRef, useContext } from "react";
 import formatToTime from "../utils/FormatToTime";
 import ModeToggle from "./ModeToggle";
 import { TimerContext } from "../App";
 
-interface TimerProps {
-  time: string;
-}
-
-const Timer: React.FC<TimerProps> = () => {
+const Timer = () => {
   const [timerActive, setTimerActive] = useState(false);
   const [time, setTime] = useState("25:00");
   const seconds = useRef(0);
   const { mode } = useContext(TimerContext);
-
-  const toggleTimer = () => {
-    setTimerActive((prev) => !prev);
-  };
-
-  useEffect(() => {
-    if (timerActive) {
-      let timerLength = 0;
-      if (mode === 1) {
-        timerLength = 25;
-        setTime("25:00");
-      } else if (mode === 2) {
-        timerLength = 5;
-        setTime("5:00");
-      } else {
-        timerLength = 10;
-        setTime("10:00");
-      }
-      startTimer(timerLength);
-    }
-  }, [timerActive]);
 
   const startTimer = (length: number) => {
     const startTime = new Date();
@@ -55,6 +30,25 @@ const Timer: React.FC<TimerProps> = () => {
     }, 1000);
 
     return length;
+  };
+
+  const toggleTimer = () => {
+    setTimerActive((prev) => !prev);
+    if (timerActive) {
+      console.log("Activating timer! Mode: ", mode);
+      let timerLength = 0;
+      if (mode === 1) {
+        timerLength = 25;
+        setTime("25:00");
+      } else if (mode === 2) {
+        timerLength = 5;
+        setTime("5:00");
+      } else {
+        timerLength = 10;
+        setTime("10:00");
+      }
+      startTimer(timerLength);
+    }
   };
 
   return (

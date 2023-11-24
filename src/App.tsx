@@ -9,10 +9,9 @@ export const TimerContext = createContext<{
 function App() {
   const [mode, setMode] = useState(1);
 
-  const time = "25:00";
   return (
     <TimerContext.Provider value={{ mode, setMode }}>
-      <Timer time={time} />
+      <Timer />
     </TimerContext.Provider>
   );
 }
