@@ -9,17 +9,20 @@ const Timer = () => {
   const [time, setTime] = useState("25:00");
   const seconds = useRef(0);
   const { mode } = useContext(TimerContext);
+  // console.log("INITIAL STATE IS: ", timerActive);
 
   const startTimer = (length: number) => {
     const startTime = new Date();
 
     const interval = setInterval(() => {
-      const updatedTime = new Date();
-      const timeDiff = updatedTime.getTime() - startTime.getTime();
+      const updatedTime = Date.now();
+      const timeDiff = updatedTime - startTime.getTime();
       const roundedTimeDiff = Math.round(timeDiff / 1000);
 
       //Checking to see if timer has reached 25min
-      if (roundedTimeDiff === 1500) {
+      if (roundedTimeDiff === length * 60) {
+        console.log("Rounded Time: ", roundedTimeDiff, " Length: ", length);
+        console.log("TIME OUT!");
         //Ending the interval timer
         clearInterval(interval);
         setTime("00:00");
@@ -38,8 +41,14 @@ const Timer = () => {
   };
 
   const toggleTimer = () => {
+    console.log(
+      "TIMER WAS: ",
+      timerActive,
+      "NOW TOGGLING TIMER TO: ",
+      !timerActive
+    );
     setTimerActive((prev) => !prev);
-    console.log("TOGGLING TIMER", timerActive);
+
     if (timerActive) {
       console.log("Activating timer! Mode: ", mode);
       let timerLength = 0;
