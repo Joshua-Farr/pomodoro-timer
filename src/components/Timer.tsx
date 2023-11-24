@@ -23,8 +23,13 @@ const Timer = () => {
         //Ending the interval timer
         clearInterval(interval);
         setTime("00:00");
+        setTimerActive(false);
       }
-
+      console.log("Checking for pause!", timerActive);
+      if (!timerActive) {
+        console.log("PAUSING!");
+        clearInterval(interval);
+      }
       seconds.current = roundedTimeDiff;
       setTime(formatToTime(seconds.current, length));
     }, 1000);
@@ -34,6 +39,7 @@ const Timer = () => {
 
   const toggleTimer = () => {
     setTimerActive((prev) => !prev);
+    console.log("TOGGLING TIMER", timerActive);
     if (timerActive) {
       console.log("Activating timer! Mode: ", mode);
       let timerLength = 0;
