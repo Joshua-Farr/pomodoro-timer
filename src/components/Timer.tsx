@@ -20,6 +20,14 @@ const Timer = () => {
       elapsedTime = timeDiff;
       const roundedTimeDiff = Math.round(timeDiff / 1000);
 
+      console.log("Checking for pause!", timerActive);
+      if (timerActive === false) {
+        console.log("PAUSING!");
+        setTime(formatToTime(elapsedTime, length));
+        clearInterval(interval);
+        return;
+      }
+
       //Checking to see if timer has reached 25min
       if (roundedTimeDiff === length * 60) {
         console.log("Rounded Time: ", roundedTimeDiff, " Length: ", length);
@@ -30,12 +38,7 @@ const Timer = () => {
         setTime("00:00");
         setTimerActive(false);
       }
-      console.log("Checking for pause!", timerActive);
-      if (!timerActive) {
-        setTime(formatToTime(elapsedTime, length));
-        console.log("PAUSING!");
-        clearInterval(interval);
-      }
+
       seconds.current = roundedTimeDiff;
       setTime(formatToTime(seconds.current, length));
     }, 1000);
@@ -45,18 +48,19 @@ const Timer = () => {
 
   useEffect(() => {
     console.log("State changed!!!!!", timerActive);
+
+    let timerLength = 0;
+    if (mode === 1) {
+      timerLength = 25;
+      setTime("25:00");
+    } else if (mode === 2) {
+      timerLength = 5;
+      setTime("5:00");
+    } else {
+      timerLength = 10;
+      setTime("10:00");
+    }
     if (timerActive) {
-      let timerLength = 0;
-      if (mode === 1) {
-        timerLength = 25;
-        setTime("25:00");
-      } else if (mode === 2) {
-        timerLength = 5;
-        setTime("5:00");
-      } else {
-        timerLength = 10;
-        setTime("10:00");
-      }
       startTimer(timerLength);
     }
   }, [timerActive, mode]);
