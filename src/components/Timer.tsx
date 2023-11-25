@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState, useRef, useContext } from "react";
+import { useState, useRef, useContext, useEffect } from "react";
 import formatToTime from "../utils/FormatToTime";
 import ModeToggle from "./ModeToggle";
 import { TimerContext } from "../App";
@@ -9,7 +9,7 @@ const Timer = () => {
   const [time, setTime] = useState("25:00");
   const seconds = useRef(0);
   const { mode } = useContext(TimerContext);
-  // console.log("INITIAL STATE IS: ", timerActive);
+  let elapsedTime = 0;
 
   const startTimer = (length: number) => {
     const startTime = new Date();
@@ -17,12 +17,14 @@ const Timer = () => {
     const interval = setInterval(() => {
       const updatedTime = Date.now();
       const timeDiff = updatedTime - startTime.getTime();
+      elapsedTime = timeDiff;
       const roundedTimeDiff = Math.round(timeDiff / 1000);
 
       //Checking to see if timer has reached 25min
       if (roundedTimeDiff === length * 60) {
         console.log("Rounded Time: ", roundedTimeDiff, " Length: ", length);
         console.log("TIME OUT!");
+
         //Ending the interval timer
         clearInterval(interval);
         setTime("00:00");
@@ -30,6 +32,7 @@ const Timer = () => {
       }
       console.log("Checking for pause!", timerActive);
       if (!timerActive) {
+        setTime(formatToTime(elapsedTime, length));
         console.log("PAUSING!");
         clearInterval(interval);
       }
@@ -40,17 +43,9 @@ const Timer = () => {
     return length;
   };
 
-  const toggleTimer = () => {
-    console.log(
-      "TIMER WAS: ",
-      timerActive,
-      "NOW TOGGLING TIMER TO: ",
-      !timerActive
-    );
-    setTimerActive((prev) => !prev);
-
+  useEffect(() => {
+    console.log("State changed!!!!!", timerActive);
     if (timerActive) {
-      console.log("Activating timer! Mode: ", mode);
       let timerLength = 0;
       if (mode === 1) {
         timerLength = 25;
@@ -64,6 +59,10 @@ const Timer = () => {
       }
       startTimer(timerLength);
     }
+  }, [timerActive, mode]);
+
+  const toggleTimer = () => {
+    setTimerActive((prev) => !prev);
   };
 
   return (
