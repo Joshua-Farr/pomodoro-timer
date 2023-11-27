@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { useState, useRef, useContext, useEffect } from "react";
 import formatToTime from "../utils/FormatToTime";
 import ModeToggle from "./ModeToggle";
+import Spinner from "./Spinner.tsx";
+
 import { TimerContext } from "../App";
 
 const Timer = () => {
@@ -77,6 +79,7 @@ const Timer = () => {
         {time}
         <Typography>{timerActive === true ? `Pause` : `Start`}</Typography>
       </StyledTimer>
+      <Spinner percent={100} />
     </TimerWrapper>
   );
 };
