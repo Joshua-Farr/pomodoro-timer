@@ -3,6 +3,7 @@ import { useState, useRef, useContext, useEffect } from "react";
 import formatToTime from "../utils/FormatToTime";
 import ModeToggle from "./ModeToggle";
 import Spinner from "./Spinner.tsx";
+import { convertTimeToPercent } from "../utils/convertTimeToPercent.tsx";
 
 import { TimerContext } from "../App";
 
@@ -79,7 +80,7 @@ const Timer = () => {
         {time}
         <Typography>{timerActive === true ? `Pause` : `Start`}</Typography>
       </StyledTimer>
-      <Spinner percent={100} />
+      <Spinner percent={convertTimeToPercent(500, 10)} />
     </TimerWrapper>
   );
 };
