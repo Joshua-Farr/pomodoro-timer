@@ -49,12 +49,3 @@ const StyledToggle = styled.div`
     cursor: pointer;
   }
 `;
-
-const StyledCategory = styled.span`
-  color: #151932;
-  background-color: #f87070;
-  border-radius: 25px;
-  margin: -1.25rem 0;
-  margin-left: -1em;
-  padding: 0.45em 1rem;
-`;

@@ -10,8 +10,10 @@ import { TimerContext } from "../App";
 const Timer = () => {
   const [timerActive, setTimerActive] = useState(false);
   const [time, setTime] = useState("25:00");
-  const seconds = useRef(0);
   const { mode } = useContext(TimerContext);
+  const [pomodoroTimerLength, setPomodoroTimerLength] = useState(0);
+
+  const seconds = useRef(0);
   let elapsedTime = 0;
 
   const startTimer = (length: number) => {
@@ -65,6 +67,7 @@ const Timer = () => {
     }
     if (timerActive) {
       startTimer(timerLength);
+      setPomodoroTimerLength(timerLength);
     }
   }, [timerActive, mode]);
 
@@ -79,8 +82,10 @@ const Timer = () => {
       <StyledTimer onClick={() => toggleTimer()}>
         {time}
         <Typography>{timerActive === true ? `Pause` : `Start`}</Typography>
+        <Spinner
+          percent={convertTimeToPercent(seconds.current, pomodoroTimerLength)}
+        />
       </StyledTimer>
-      <Spinner percent={convertTimeToPercent(500, 10)} />
     </TimerWrapper>
   );
 };
