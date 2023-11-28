@@ -4,7 +4,7 @@ interface SpinnerProps {
 
 const Spinner: React.FC<SpinnerProps> = ({ percent }) => {
   const calcOffset = (requirement: number) => {
-    return 1100 - 1100 * (requirement / 100);
+    return 1100 * (requirement / 100);
   };
 
   return (
