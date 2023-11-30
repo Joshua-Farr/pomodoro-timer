@@ -19,6 +19,7 @@ const Timer = () => {
   let elapsedTime = 0;
 
   const startTimer = (length: number) => {
+    console.log("Starting timer with: ", length);
     const startTime = new Date();
 
     interval.current = setInterval(() => {
@@ -36,10 +37,8 @@ const Timer = () => {
       // }
 
       //Checking to see if timer has reached 25min
-      if (roundedTimeDiff === length * 60) {
-        console.log("Rounded Time: ", roundedTimeDiff, " Length: ", length);
+      if (timerLength.current === 0) {
         console.log("TIME OUT!");
-
         //Ending the interval timer
         clearInterval(interval.current);
         setTime("00:00");
