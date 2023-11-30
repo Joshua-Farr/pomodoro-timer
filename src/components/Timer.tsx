@@ -13,13 +13,14 @@ const Timer = () => {
   const { mode } = useContext(TimerContext);
   const [pomodoroTimerLength, setPomodoroTimerLength] = useState(0);
 
+  const interval = useRef(1);
   const seconds = useRef(0);
   let elapsedTime = 0;
 
   const startTimer = (length: number) => {
     const startTime = new Date();
 
-    const interval = setInterval(() => {
+    interval.current = setInterval(() => {
       const updatedTime = Date.now();
       const timeDiff = updatedTime - startTime.getTime();
       elapsedTime = timeDiff;
@@ -53,7 +54,7 @@ const Timer = () => {
 
   useEffect(() => {
     console.log("State changed!!!!!", timerActive);
-
+    clearInterval(interval.current);
     let timerLength = 0;
     if (mode === 1) {
       timerLength = 25;
