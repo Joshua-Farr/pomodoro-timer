@@ -15,6 +15,7 @@ const Timer = () => {
 
   const interval = useRef(1);
   const seconds = useRef(0);
+  const timerLength = useRef(0);
   let elapsedTime = 0;
 
   const startTimer = (length: number) => {
@@ -26,13 +27,13 @@ const Timer = () => {
       elapsedTime = timeDiff;
       const roundedTimeDiff = Math.round(timeDiff / 1000);
 
-      console.log("Checking for pause!", timerActive);
-      if (timerActive === false) {
-        console.log("PAUSING!");
-        setTime(formatToTime(elapsedTime, length));
-        clearInterval(interval);
-        return;
-      }
+      // console.log("Checking for pause!", timerActive);
+      // if (timerActive === false) {
+      //   console.log("PAUSING!");
+      //   // setTime(formatToTime(elapsedTime, `length`));
+      //   clearInterval(interval.current);
+      //   return;
+      // }
 
       //Checking to see if timer has reached 25min
       if (roundedTimeDiff === length * 60) {
@@ -40,10 +41,14 @@ const Timer = () => {
         console.log("TIME OUT!");
 
         //Ending the interval timer
-        clearInterval(interval);
+        clearInterval(interval.current);
         setTime("00:00");
         setTimerActive(false);
       }
+
+      console.log(roundedTimeDiff);
+      timerLength.current = length - roundedTimeDiff / 60;
+      console.log("Timer Length: ", timerLength.current);
 
       seconds.current = roundedTimeDiff;
       setTime(formatToTime(seconds.current, length));
@@ -53,24 +58,28 @@ const Timer = () => {
   };
 
   useEffect(() => {
-    console.log("State changed!!!!!", timerActive);
     clearInterval(interval.current);
-    let timerLength = 0;
     if (mode === 1) {
-      timerLength = 25;
+      timerLength.current = 25;
       setTime("25:00");
     } else if (mode === 2) {
-      timerLength = 5;
+      timerLength.current = 5;
       setTime("5:00");
-    } else {
-      timerLength = 10;
+    } else if (mode === 3) {
+      timerLength.current = 10;
       setTime("10:00");
     }
+  }, [mode]);
+
+  useEffect(() => {
     if (timerActive) {
-      startTimer(timerLength);
-      setPomodoroTimerLength(timerLength);
+      startTimer(timerLength.current);
+      console.log("Timer is active!");
+    } else {
+      console.log("timer is inactive!");
+      clearInterval(interval.current);
     }
-  }, [timerActive, mode]);
+  }, [timerActive]);
 
   const toggleTimer = () => {
     setTimerActive((prev) => !prev);
