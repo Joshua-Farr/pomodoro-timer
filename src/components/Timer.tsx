@@ -10,12 +10,14 @@ import { TimerContext } from "../App";
 const Timer = () => {
   const [timerActive, setTimerActive] = useState(false);
   const [time, setTime] = useState("25:00");
-  const { mode } = useContext(TimerContext);
+  const { mode, setMode } = useContext(TimerContext);
   const [pomodoroTimerLength, setPomodoroTimerLength] = useState(0);
+  const [numDone, setNumDone] = useState(0);
 
   const interval = useRef(1);
   const seconds = useRef(0);
   const timerLength = useRef(0);
+
   let elapsedTime = 0;
 
   const startTimer = (length: number) => {
@@ -43,6 +45,15 @@ const Timer = () => {
         clearInterval(interval.current);
         setTime("00:00");
         setTimerActive(false);
+        if (mode === 1) {
+          setMode(2);
+          setNumDone((prev) => {
+            return prev + 1;
+          });
+        }
+        if (mode === 1 && numDone % 3 === 0) {
+          setMode(3);
+        } // Forcing longer break.
       }
 
       console.log(roundedTimeDiff);
@@ -57,6 +68,7 @@ const Timer = () => {
   };
 
   useEffect(() => {
+    setTimerActive(false);
     clearInterval(interval.current);
     if (mode === 1) {
       timerLength.current = 25;
@@ -85,17 +97,19 @@ const Timer = () => {
   };
 
   return (
-    <TimerWrapper>
-      <Title>pomodoro</Title>
-      <ModeToggle />
-      <StyledTimer onClick={() => toggleTimer()}>
-        {time}
-        <Typography>{timerActive === true ? `Pause` : `Start`}</Typography>
-        <Spinner
-          percent={convertTimeToPercent(seconds.current, pomodoroTimerLength)}
-        />
-      </StyledTimer>
-    </TimerWrapper>
+    <>
+      <TimerWrapper>
+        <Title>pomodoro</Title>
+        <ModeToggle />
+        <StyledTimer onClick={() => toggleTimer()}>
+          {time}
+          <Typography>{timerActive === true ? `Pause` : `Start`}</Typography>
+          <Spinner
+            percent={convertTimeToPercent(seconds.current, pomodoroTimerLength)}
+          />
+        </StyledTimer>
+      </TimerWrapper>
+    </>
   );
 };
 
