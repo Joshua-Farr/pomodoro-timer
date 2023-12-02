@@ -4,7 +4,8 @@ export default function formatToTime(number: number, length: number) {
   console.log("Now formatting: ", number, ". With length of: ", length);
 
   let minutes = Math.ceil(length) - 1 - Math.floor(number / 60);
-  let seconds = 59 - (number % 60);
+  let seconds = 60 - (number % 60);
+  // let seconds = Math.round((length % 1) * 60);
 
   let formattedMinutes = "";
   let formattedSeconds = "";
