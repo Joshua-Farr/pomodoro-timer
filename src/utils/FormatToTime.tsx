@@ -17,6 +17,8 @@ export default function formatToTime(number: number, length: number) {
 
   if (seconds <= 9) {
     formattedSeconds = `0${seconds}`;
+  } else if (seconds === 60) {
+    formattedSeconds = `00`;
   } else {
     formattedSeconds = `${seconds}`;
   }
