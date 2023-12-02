@@ -1,12 +1,10 @@
 export default function formatToTime(number: number, length: number) {
   // let time = "";
 
-  console.log("Now formatting: ", number, ". With length of: ", length);
+  // console.log("Now formatting: ", number, ". With length of: ", length);
 
   let minutes = Math.ceil(length) - 1 - Math.floor(number / 60);
   let seconds = 60 - (number % 60);
-  console.log("Corverted seconds!: ", seconds);
-  // let seconds = Math.round((length % 1) * 60);
 
   let formattedMinutes = "";
   let formattedSeconds = "";

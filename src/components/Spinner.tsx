@@ -15,6 +15,7 @@ const Spinner: React.FC<SpinnerProps> = ({ percent }) => {
       height="450"
       style={{
         position: "absolute",
+        transform: "rotate(-0.25turn) scaleY(-1) ",
 
         zIndex: "2",
       }}

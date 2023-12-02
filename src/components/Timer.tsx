@@ -18,7 +18,7 @@ const Timer = () => {
   const timerLength = useRef(0);
 
   const startTimer = (length: number) => {
-    console.log("Starting timer with: ", length);
+    // console.log("Starting timer with: ", length);
     const startTime = new Date();
 
     interval.current = setInterval(() => {
