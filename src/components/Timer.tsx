@@ -46,10 +46,10 @@ const Timer = () => {
         setTime("00:00");
         setTimerActive(false);
         if (mode === 1) {
-          setMode(2);
           setNumDone((prev) => {
             return prev + 1;
           });
+          setMode(2);
         }
         if (mode === 1 && numDone % 3 === 0) {
           setMode(3);
@@ -57,7 +57,7 @@ const Timer = () => {
       }
 
       console.log(roundedTimeDiff);
-      timerLength.current = length - roundedTimeDiff / 60;
+      timerLength.current = Math.ceil(length - roundedTimeDiff / 60);
       console.log("Timer Length: ", timerLength.current);
 
       seconds.current = roundedTimeDiff;
