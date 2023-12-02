@@ -11,9 +11,7 @@ const Timer = () => {
   const [timerActive, setTimerActive] = useState(false);
   const [time, setTime] = useState("25:00");
   const { mode, setMode } = useContext(TimerContext);
-  const [pomodoroTimerLength] = useState(0);
   const [numDone, setNumDone] = useState(0);
-  const [secondsElapsed, setSecondsElapsed] = useState(0);
 
   const interval = useRef(1);
   const seconds = useRef(0);
@@ -51,7 +49,6 @@ const Timer = () => {
       timerLength.current = length - roundedTimeDiff / 60;
       console.log("Timer Length: ", timerLength.current);
 
-      seconds.current = roundedTimeDiff;
       setTime(formatToTime(seconds.current, length));
     }, 1000);
 
@@ -96,7 +93,7 @@ const Timer = () => {
           {time}
           <Typography>{timerActive === true ? `Pause` : `Start`}</Typography>
           <Spinner
-            percent={convertTimeToPercent(seconds.current, pomodoroTimerLength)}
+            percent={convertTimeToPercent(seconds.current, timerLength.current)}
           />
         </StyledTimer>
       </TimerWrapper>
