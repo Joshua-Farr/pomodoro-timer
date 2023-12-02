@@ -11,14 +11,13 @@ const Timer = () => {
   const [timerActive, setTimerActive] = useState(false);
   const [time, setTime] = useState("25:00");
   const { mode, setMode } = useContext(TimerContext);
-  const [pomodoroTimerLength, setPomodoroTimerLength] = useState(0);
+  const [pomodoroTimerLength] = useState(0);
   const [numDone, setNumDone] = useState(0);
+  const [secondsElapsed, setSecondsElapsed] = useState(0);
 
   const interval = useRef(1);
   const seconds = useRef(0);
   const timerLength = useRef(0);
-
-  let elapsedTime = 0;
 
   const startTimer = (length: number) => {
     console.log("Starting timer with: ", length);
@@ -27,16 +26,7 @@ const Timer = () => {
     interval.current = setInterval(() => {
       const updatedTime = Date.now();
       const timeDiff = updatedTime - startTime.getTime();
-      elapsedTime = timeDiff;
       const roundedTimeDiff = Math.round(timeDiff / 1000);
-
-      // console.log("Checking for pause!", timerActive);
-      // if (timerActive === false) {
-      //   console.log("PAUSING!");
-      //   // setTime(formatToTime(elapsedTime, `length`));
-      //   clearInterval(interval.current);
-      //   return;
-      // }
 
       //Checking to see if timer has reached 25min
       if (timerLength.current === 0) {
@@ -57,7 +47,8 @@ const Timer = () => {
       }
 
       console.log(roundedTimeDiff);
-      timerLength.current = Math.ceil(length - roundedTimeDiff / 60);
+      seconds.current = roundedTimeDiff;
+      timerLength.current = length - roundedTimeDiff / 60;
       console.log("Timer Length: ", timerLength.current);
 
       seconds.current = roundedTimeDiff;
