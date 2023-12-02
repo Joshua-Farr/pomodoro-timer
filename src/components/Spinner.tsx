@@ -13,7 +13,11 @@ const Spinner: React.FC<SpinnerProps> = ({ percent }) => {
       version="1.1"
       width="450"
       height="450"
-      style={{ position: "absolute", top: "460" }}
+      style={{
+        position: "absolute",
+
+        zIndex: "2",
+      }}
     >
       <circle
         cx="50%"
