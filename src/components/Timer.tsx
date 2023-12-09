@@ -63,12 +63,15 @@ const Timer = () => {
     clearInterval(interval.current);
     if (mode === 1) {
       timerLength.current = 25;
+      seconds.current = 0;
       setTime("25:00");
     } else if (mode === 2) {
       timerLength.current = 5;
+      seconds.current = 0;
       setTime("5:00");
     } else if (mode === 3) {
       timerLength.current = 10;
+      seconds.current = 0;
       setTime("10:00");
     }
   }, [mode]);
