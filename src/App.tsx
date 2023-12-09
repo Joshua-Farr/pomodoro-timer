@@ -1,3 +1,4 @@
+import { SettingsMenu } from "./components/SettingsMenu";
 import Timer from "./components/Timer";
 import { createContext, useState } from "react";
 
@@ -10,9 +11,10 @@ function App() {
   const [mode, setMode] = useState(1);
 
   return (
-    <TimerContext.Provider value={{ mode, setMode }}>
-      <Timer />
-    </TimerContext.Provider>
+    // <TimerContext.Provider value={{ mode, setMode }}>
+    //   <Timer />
+    // </TimerContext.Provider>
+    <SettingsMenu />
   );
 }
 

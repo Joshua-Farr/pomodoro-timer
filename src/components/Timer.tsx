@@ -4,6 +4,7 @@ import formatToTime from "../utils/FormatToTime";
 import ModeToggle from "./ModeToggle";
 import Spinner from "./Spinner.tsx";
 import { convertTimeToPercent } from "../utils/convertTimeToPercent.tsx";
+import SettingsIcon from "@mui/icons-material/Settings";
 
 import { TimerContext } from "../App";
 
@@ -12,6 +13,7 @@ const Timer = () => {
   const [time, setTime] = useState("25:00");
   const { mode, setMode } = useContext(TimerContext);
   const [numDone, setNumDone] = useState(0);
+  const [settingsVisible, setSettingsVisible] = useState(true);
 
   const interval = useRef(1);
   const seconds = useRef(0);
@@ -100,6 +102,12 @@ const Timer = () => {
           <Typography>{timerActive === true ? `Pause` : `Start`}</Typography>
           <Spinner percent={convertTimeToPercent(timerLength.current, mode)} />
         </StyledTimer>
+        <SettingsIcon
+          style={{ marginTop: "1.75em", height: "35px", width: "35px" }}
+          onClick={() => {
+            setSettingsVisible((prev) => !prev);
+          }}
+        />
       </TimerWrapper>
     </>
   );
