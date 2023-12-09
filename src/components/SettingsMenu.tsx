@@ -9,7 +9,7 @@ export const SettingsMenu = () => {
     height: 400px;
     width: 600px;
     border-radius: 25px;
-    padding: 2em;
+    padding: 0.75em 2em;
   `;
 
   const StyledButton = styled.button`
@@ -46,13 +46,21 @@ export const SettingsMenu = () => {
     flex-direction: column;
     gap: 2px;
   `;
-
   const TimeSettingsWrapper = styled.div`
     display: flex;
     gap: 10px;
     margin-top: 0.75em;
     border-bottom: 1px solid #a5a7ad;
     padding-bottom: 1.25em;
+  `;
+
+  const OtherSettingsWrapper = styled.div`
+    display: flex;
+    gap: 10px;
+    margin-top: 0.75em;
+    border-bottom: 1px solid #a5a7ad;
+    padding-bottom: 1.25em;
+    justify-content: space-between;
   `;
 
   const SettingCircle = styled.div`
@@ -77,7 +85,12 @@ export const SettingsMenu = () => {
     <MenuWrapper>
       <StyledMenu>
         <h1>Settings:</h1>
-        <h3 style={{ textTransform: "uppercase", letterSpacing: "2.5px" }}>
+        <h3
+          style={{
+            textTransform: "uppercase",
+            letterSpacing: "2.5px",
+          }}
+        >
           Time (minutes)
         </h3>
         <TimeSettingsWrapper>
@@ -96,9 +109,27 @@ export const SettingsMenu = () => {
             <StyledInput type="number" min="0" value="10"></StyledInput>
           </SettingsWrapper>
         </TimeSettingsWrapper>
-        <SettingCircle>Aa</SettingCircle>
-        <SettingCircle>Aa</SettingCircle>
-        <SettingCircle>Aa</SettingCircle>
+
+        <OtherSettingsWrapper>
+          <h3 style={{ textTransform: "uppercase", letterSpacing: "1.5px" }}>
+            Font
+          </h3>
+          <div style={{ display: "flex", gap: "1em" }}>
+            <SettingCircle>Aa</SettingCircle>
+            <SettingCircle>Aa</SettingCircle>
+            <SettingCircle>Aa</SettingCircle>
+          </div>
+        </OtherSettingsWrapper>
+        <OtherSettingsWrapper>
+          <h3 style={{ textTransform: "uppercase", letterSpacing: "1.5px" }}>
+            Color
+          </h3>
+          <div style={{ display: "flex", gap: "1em" }}>
+            <SettingCircle></SettingCircle>
+            <SettingCircle></SettingCircle>
+            <SettingCircle></SettingCircle>
+          </div>
+        </OtherSettingsWrapper>
       </StyledMenu>
       <StyledButton>Apply</StyledButton>
     </MenuWrapper>
