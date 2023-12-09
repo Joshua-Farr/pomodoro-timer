@@ -98,9 +98,7 @@ const Timer = () => {
         <StyledTimer onClick={() => toggleTimer()}>
           {time}
           <Typography>{timerActive === true ? `Pause` : `Start`}</Typography>
-          <Spinner
-            percent={convertTimeToPercent(seconds.current, timerLength.current)}
-          />
+          <Spinner percent={convertTimeToPercent(timerLength.current, mode)} />
         </StyledTimer>
       </TimerWrapper>
     </>

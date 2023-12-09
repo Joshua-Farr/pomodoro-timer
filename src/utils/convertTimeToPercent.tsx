@@ -1,6 +1,15 @@
 export const convertTimeToPercent = (
-  currentTime: number, //In seconds
-  totalTime: number // In minutes
+  totalTime: number, // In minutes
+  mode: number
 ): number => {
-  return Math.round((currentTime / (totalTime * 60)) * 100);
+  let timerTotal = 0;
+  if (mode === 1) {
+    timerTotal = 25;
+  } else if (mode === 2) {
+    timerTotal = 5;
+  } else {
+    timerTotal = 10;
+  }
+
+  return 100 - (totalTime / timerTotal) * 100;
 };
