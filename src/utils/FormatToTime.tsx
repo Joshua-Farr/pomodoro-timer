@@ -1,7 +1,7 @@
-export default function formatToTime(number: number, length: number) {
+export default function formatToTime(length: number) {
   // console.log("Now formatting: ", number, ". With length of: ", length);
 
-  let minutes = Math.trunc(length) - Math.floor(number / 60);
+  let minutes = Math.trunc(length);
 
   let seconds = Math.round(60 * (length % 1));
 
@@ -10,10 +10,13 @@ export default function formatToTime(number: number, length: number) {
 
   formattedMinutes = `${minutes}`;
 
-  if (seconds === 60) {
+  if (seconds <= 9) {
+    formattedSeconds = `0${seconds}`;
+  } else if (seconds === 60) {
     formattedSeconds = `00`;
   } else {
     formattedSeconds = `${seconds}`;
   }
+
   return `${formattedMinutes}:${formattedSeconds}`;
 }

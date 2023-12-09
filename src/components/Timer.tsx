@@ -51,12 +51,13 @@ const Timer = () => {
       timerLength.current = length - roundedTimeDiff / 60;
       console.log("Timer Length: ", timerLength.current);
 
-      setTime(formatToTime(seconds.current, timerLength.current));
+      setTime(formatToTime(timerLength.current));
     }, 1000);
 
     return length;
   };
 
+  //Changing the state for which time has been selected
   useEffect(() => {
     setTimerActive(false);
     clearInterval(interval.current);
