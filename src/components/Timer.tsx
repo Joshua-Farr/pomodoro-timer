@@ -22,27 +22,29 @@ const Timer = () => {
     const startTime = new Date();
 
     interval.current = setInterval(() => {
-      const updatedTime = Date.now();
-      const timeDiff = updatedTime - startTime.getTime();
-      const roundedTimeDiff = Math.round(timeDiff / 1000);
-
-      //Checking to see if timer has reached 25min
+      //Checking to see if timer has run out
       if (timerLength.current === 0) {
         console.log("TIME OUT!");
         //Ending the interval timer
-        clearInterval(interval.current);
         setTime("00:00");
         setTimerActive(false);
         if (mode === 1) {
           setNumDone((prev) => {
             return prev + 1;
           });
-          setMode(2);
+          if (numDone % 3 === 0) {
+            setMode(3);
+          } // Forcing longer break after 3 regular pomodoros
+          else {
+            setMode(2);
+          }
         }
-        if (mode === 1 && numDone % 3 === 0) {
-          setMode(3);
-        } // Forcing longer break.
+        clearInterval(interval.current);
       }
+
+      const updatedTime = Date.now();
+      const timeDiff = updatedTime - startTime.getTime();
+      const roundedTimeDiff = Math.round(timeDiff / 1000);
 
       console.log(roundedTimeDiff);
       seconds.current = roundedTimeDiff;
