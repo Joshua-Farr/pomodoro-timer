@@ -49,7 +49,7 @@ const Timer = () => {
       timerLength.current = length - roundedTimeDiff / 60;
       console.log("Timer Length: ", timerLength.current);
 
-      setTime(formatToTime(seconds.current, length));
+      setTime(formatToTime(seconds.current, timerLength.current));
     }, 1000);
 
     return length;
