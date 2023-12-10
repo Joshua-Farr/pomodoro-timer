@@ -2,9 +2,11 @@ import { useContext, useState } from "react";
 import { TimerContext } from "../App";
 import styled from "styled-components";
 import { Settings } from "../Interfaces";
+import CloseIcon from "@mui/icons-material/Close";
 
 export const SettingsMenu = ({ toggle }) => {
   const color = "#6ff2f8";
+
   const StyledMenu = styled.div`
     background-color: white;
     height: 400px;
@@ -92,27 +94,30 @@ export const SettingsMenu = ({ toggle }) => {
     justify-content: space-between;
   `;
 
-  const hadleSettingSettings = () => {
-    console.log("Saving settings!");
-    setSettings(tempSettings);
-    toggle();
-  };
-
   const ExitButton = styled.div`
-
-    border: "2px solid black",
-    width: "30px",
-    height: "30px",
-    textAlign: "center",
-    font-size: 20rem;
-
-    &:hover{
-      cursor:pointer;
+    border: 2px solid lightgray;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    font-size: 24px;
+    border-radius: 50%;
+    padding: none;
+    margin: none;
+    &:hover {
+      cursor: pointer;
     }
   `;
 
   const { settings, setSettings } = useContext(TimerContext);
   const [tempSettings, setTempSettings] = useState<Settings>(settings);
+
+  console.log(tempSettings);
+
+  const hadleSettingSettings = () => {
+    console.log("Saving settings!");
+    setSettings(tempSettings);
+    toggle();
+  };
 
   return (
     <MenuWrapper>
@@ -120,7 +125,7 @@ export const SettingsMenu = ({ toggle }) => {
         <MenuHeader>
           <h1>Settings:</h1>
           <ExitButton onClick={toggle}>
-            <h3>X</h3>
+            <CloseIcon />
           </ExitButton>
         </MenuHeader>
         <h3
@@ -144,10 +149,9 @@ export const SettingsMenu = ({ toggle }) => {
                   e.target.value
                 );
                 setTempSettings((prev: Settings) => ({
-                  pomodoro: parseInt(e.target.value, 10),
                   ...prev,
+                  pomodoro: parseInt(e.target.value, 10),
                 }));
-                console.log("Setting pomodoro time to: ", e.target.value);
               }}
             ></StyledInput>
           </SettingsWrapper>
@@ -159,6 +163,16 @@ export const SettingsMenu = ({ toggle }) => {
               type="number"
               min="0"
               value={tempSettings.short}
+              onChange={(e) => {
+                console.log(
+                  "Changing the settings of pomodoro to ",
+                  e.target.value
+                );
+                setTempSettings((prev: Settings) => ({
+                  ...prev,
+                  short: parseInt(e.target.value, 10),
+                }));
+              }}
             ></StyledInput>
           </SettingsWrapper>
           <SettingsWrapper>
@@ -167,6 +181,16 @@ export const SettingsMenu = ({ toggle }) => {
               type="number"
               min="0"
               value={tempSettings.long}
+              onChange={(e) => {
+                console.log(
+                  "Changing the settings of pomodoro to ",
+                  e.target.value
+                );
+                setTempSettings((prev: Settings) => ({
+                  ...prev,
+                  long: parseInt(e.target.value, 10),
+                }));
+              }}
             ></StyledInput>
           </SettingsWrapper>
         </TimeSettingsWrapper>
@@ -222,7 +246,14 @@ export const SettingsMenu = ({ toggle }) => {
           </div>
         </OtherSettingsWrapper>
       </StyledMenu>
-      <StyledButton onClick={() => hadleSettingSettings()}>Apply</StyledButton>
+      <StyledButton
+        onClick={() => {
+          console.log("Apply button has been clicked!");
+          hadleSettingSettings();
+        }}
+      >
+        Apply
+      </StyledButton>
     </MenuWrapper>
   );
 };
