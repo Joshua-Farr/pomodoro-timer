@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 // const [color, setColor] = useState("#f87070");
 
-export const SettingsMenu = () => {
+export const SettingsMenu = ({ toggle }) => {
   const StyledMenu = styled.div`
     background-color: white;
     height: 400px;
@@ -26,10 +26,13 @@ export const SettingsMenu = () => {
   `;
 
   const MenuWrapper = styled.div`
+    position: absolute;
+    z-index: 4;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   `;
 
   const StyledInput = styled.input`
@@ -67,7 +70,7 @@ export const SettingsMenu = () => {
     height: 40px;
     width: 40px;
     color: black;
-    background-color: magenta;
+    background-color: lightblue;
     border-radius: 50%;
     display: flex;
     flex-direction: column;
@@ -115,9 +118,27 @@ export const SettingsMenu = () => {
             Font
           </h3>
           <div style={{ display: "flex", gap: "1em" }}>
-            <SettingCircle>Aa</SettingCircle>
-            <SettingCircle>Aa</SettingCircle>
-            <SettingCircle>Aa</SettingCircle>
+            <SettingCircle
+              onClick={() => {
+                console.log("Settings button clicked!");
+              }}
+            >
+              Aa
+            </SettingCircle>
+            <SettingCircle
+              onClick={() => {
+                console.log("Settings button clicked!");
+              }}
+            >
+              Aa
+            </SettingCircle>
+            <SettingCircle
+              onClick={() => {
+                console.log("Settings button clicked!");
+              }}
+            >
+              Aa
+            </SettingCircle>
           </div>
         </OtherSettingsWrapper>
         <OtherSettingsWrapper>
@@ -125,13 +146,25 @@ export const SettingsMenu = () => {
             Color
           </h3>
           <div style={{ display: "flex", gap: "1em" }}>
-            <SettingCircle></SettingCircle>
-            <SettingCircle></SettingCircle>
-            <SettingCircle></SettingCircle>
+            <SettingCircle
+              onClick={() => {
+                console.log("Settings button clicked!");
+              }}
+            ></SettingCircle>
+            <SettingCircle
+              onClick={() => {
+                console.log("Settings button clicked!");
+              }}
+            ></SettingCircle>
+            <SettingCircle
+              onClick={() => {
+                console.log("Settings button clicked!");
+              }}
+            ></SettingCircle>
           </div>
         </OtherSettingsWrapper>
       </StyledMenu>
-      <StyledButton>Apply</StyledButton>
+      <StyledButton onClick={toggle}>Apply</StyledButton>
     </MenuWrapper>
   );
 };

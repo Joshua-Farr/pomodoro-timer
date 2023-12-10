@@ -7,6 +7,7 @@ import { convertTimeToPercent } from "../utils/convertTimeToPercent.tsx";
 import SettingsIcon from "@mui/icons-material/Settings";
 
 import { TimerContext } from "../App";
+import { SettingsMenu } from "./SettingsMenu.tsx";
 
 const Timer = () => {
   const [timerActive, setTimerActive] = useState(false);
@@ -92,6 +93,11 @@ const Timer = () => {
     setTimerActive((prev) => !prev);
   };
 
+  const toggleMenu = () => {
+    console.log("Toggling the menu!");
+    setSettingsVisible((prev) => !prev);
+  };
+
   return (
     <>
       <TimerWrapper>
@@ -108,6 +114,7 @@ const Timer = () => {
             setSettingsVisible((prev) => !prev);
           }}
         />
+        {settingsVisible && <SettingsMenu toggle={() => toggleMenu()} />}
       </TimerWrapper>
     </>
   );
@@ -120,6 +127,7 @@ const TimerWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: relative;
 `;
 
 const Title = styled.h1`
