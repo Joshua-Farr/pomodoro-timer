@@ -13,6 +13,7 @@ import { SettingsMenu } from "./SettingsMenu.tsx";
 const Timer = () => {
   const [timerActive, setTimerActive] = useState(false);
   const [time, setTime] = useState("25:00");
+  const { settings, setSettings } = useContext(TimerContext);
   const { mode, setMode } = useContext(TimerContext);
   const [numDone, setNumDone] = useState(0);
   const [settingsVisible, setSettingsVisible] = useState(false);
@@ -68,17 +69,17 @@ const Timer = () => {
     setTimerActive(false);
     clearInterval(interval.current);
     if (mode === 1) {
-      timerLength.current = 25;
+      timerLength.current = settings.pomodoro;
       seconds.current = 0;
-      setTime("25:00");
+      setTime(`${settings.pomodoro}:00`);
     } else if (mode === 2) {
-      timerLength.current = 5;
+      timerLength.current = settings.short;
       seconds.current = 0;
-      setTime("5:00");
+      setTime(`${settings.short}:00`);
     } else if (mode === 3) {
-      timerLength.current = 10;
+      timerLength.current = settings.long;
       seconds.current = 0;
-      setTime("10:00");
+      setTime(`${settings.long}:00`);
     }
   }, [mode]);
 

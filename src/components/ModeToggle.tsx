@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { useContext } from "react";
 import { TimerContext } from "../App";
-import { playSound } from "../utils/playSound";
 
 const ModeToggle = () => {
   const { mode, setMode } = useContext(TimerContext);
