@@ -93,7 +93,6 @@ export const SettingsMenu = ({ toggle }) => {
   `;
 
   const hadleSettingSettings = () => {
-    playAlarm();
     console.log("Saving settings!");
     setSettings(tempSettings);
     toggle();

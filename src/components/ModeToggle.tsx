@@ -20,7 +20,6 @@ const ModeToggle = () => {
     <StyledToggle>
       <span
         onClick={() => {
-          playSound("click");
           setMode(1);
         }}
         style={mode === 1 ? selectedStyles : {}}
@@ -29,7 +28,6 @@ const ModeToggle = () => {
       </span>
       <span
         onClick={() => {
-          playSound("click");
           setMode(2);
         }}
         style={mode === 2 ? selectedStyles : {}}
@@ -38,7 +36,6 @@ const ModeToggle = () => {
       </span>
       <span
         onClick={() => {
-          playSound("click");
           setMode(3);
         }}
         style={mode === 3 ? selectedStyles : {}}

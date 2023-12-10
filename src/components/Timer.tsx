@@ -27,7 +27,16 @@ const Timer = () => {
 
     interval.current = setInterval(() => {
       //Checking to see if timer has run out
-      if (timerLength.current === 0) {
+
+      const updatedTime = Date.now();
+      const timeDiff = updatedTime - startTime.getTime();
+      const roundedTimeDiff = Math.round(timeDiff / 1000);
+
+      console.log(roundedTimeDiff);
+      seconds.current = roundedTimeDiff;
+      timerLength.current = length - roundedTimeDiff / 60;
+      console.log("Timer Length: ", timerLength.current);
+      if (timerLength.current <= 0) {
         playSound("alarm");
         console.log("TIME OUT!");
         //Ending the interval timer
@@ -45,16 +54,8 @@ const Timer = () => {
           }
         }
         clearInterval(interval.current);
+        return;
       }
-
-      const updatedTime = Date.now();
-      const timeDiff = updatedTime - startTime.getTime();
-      const roundedTimeDiff = Math.round(timeDiff / 1000);
-
-      console.log(roundedTimeDiff);
-      seconds.current = roundedTimeDiff;
-      timerLength.current = length - roundedTimeDiff / 60;
-      console.log("Timer Length: ", timerLength.current);
 
       setTime(formatToTime(timerLength.current));
     }, 1000);
