@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useContext } from "react";
 import { TimerContext } from "../App";
+import { playSound } from "../utils/playSound";
 
 const ModeToggle = () => {
   const { mode, setMode } = useContext(TimerContext);
@@ -17,13 +18,31 @@ const ModeToggle = () => {
 
   return (
     <StyledToggle>
-      <span onClick={() => setMode(1)} style={mode === 1 ? selectedStyles : {}}>
+      <span
+        onClick={() => {
+          playSound("click");
+          setMode(1);
+        }}
+        style={mode === 1 ? selectedStyles : {}}
+      >
         pomodoro
       </span>
-      <span onClick={() => setMode(2)} style={mode === 2 ? selectedStyles : {}}>
+      <span
+        onClick={() => {
+          playSound("click");
+          setMode(2);
+        }}
+        style={mode === 2 ? selectedStyles : {}}
+      >
         short break
       </span>
-      <span onClick={() => setMode(3)} style={mode === 3 ? selectedStyles : {}}>
+      <span
+        onClick={() => {
+          playSound("click");
+          setMode(3);
+        }}
+        style={mode === 3 ? selectedStyles : {}}
+      >
         long break
       </span>
     </StyledToggle>

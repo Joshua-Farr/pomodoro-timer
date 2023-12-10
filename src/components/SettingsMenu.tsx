@@ -1,11 +1,10 @@
 import { useContext, useState } from "react";
 import { TimerContext } from "../App";
 import styled from "styled-components";
-import { Settings } from "./Interfaces";
-
-// const [color, setColor] = useState("#f87070");
+import { Settings } from "../Interfaces";
 
 export const SettingsMenu = ({ toggle }) => {
+  const color = "#6ff2f8";
   const StyledMenu = styled.div`
     background-color: white;
     height: 400px;
@@ -51,6 +50,7 @@ export const SettingsMenu = ({ toggle }) => {
     flex-direction: column;
     gap: 2px;
   `;
+
   const TimeSettingsWrapper = styled.div`
     display: flex;
     gap: 10px;
@@ -72,7 +72,7 @@ export const SettingsMenu = ({ toggle }) => {
     height: 40px;
     width: 40px;
     color: black;
-    background-color: lightblue;
+    background-color: ${color};
     border-radius: 50%;
     display: flex;
     flex-direction: column;
@@ -93,6 +93,7 @@ export const SettingsMenu = ({ toggle }) => {
   `;
 
   const hadleSettingSettings = () => {
+    playAlarm();
     console.log("Saving settings!");
     setSettings(tempSettings);
     toggle();
@@ -109,11 +110,9 @@ export const SettingsMenu = ({ toggle }) => {
     &:hover{
       cursor:pointer;
     }
-  
   `;
 
   const { settings, setSettings } = useContext(TimerContext);
-  const prevSettings = settings;
   const [tempSettings, setTempSettings] = useState<Settings>(settings);
 
   return (
@@ -139,8 +138,12 @@ export const SettingsMenu = ({ toggle }) => {
             <StyledInput
               type="number"
               min="0"
-              defaultValue={prevSettings.pomodoro}
+              value={tempSettings.pomodoro}
               onChange={(e) => {
+                console.log(
+                  "Changing the settings of pomodoro to ",
+                  e.target.value
+                );
                 setTempSettings((prev: Settings) => ({
                   pomodoro: parseInt(e.target.value, 10),
                   ...prev,
@@ -156,7 +159,7 @@ export const SettingsMenu = ({ toggle }) => {
             <StyledInput
               type="number"
               min="0"
-              value={prevSettings.short}
+              value={tempSettings.short}
             ></StyledInput>
           </SettingsWrapper>
           <SettingsWrapper>
@@ -164,7 +167,7 @@ export const SettingsMenu = ({ toggle }) => {
             <StyledInput
               type="number"
               min="0"
-              value={prevSettings.long}
+              value={tempSettings.long}
             ></StyledInput>
           </SettingsWrapper>
         </TimeSettingsWrapper>

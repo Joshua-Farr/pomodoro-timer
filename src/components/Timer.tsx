@@ -5,6 +5,7 @@ import ModeToggle from "./ModeToggle";
 import Spinner from "./Spinner.tsx";
 import { convertTimeToPercent } from "../utils/convertTimeToPercent.tsx";
 import SettingsIcon from "@mui/icons-material/Settings";
+import { playSound } from "../utils/playSound.tsx";
 
 import { TimerContext } from "../App";
 import { SettingsMenu } from "./SettingsMenu.tsx";
@@ -27,6 +28,7 @@ const Timer = () => {
     interval.current = setInterval(() => {
       //Checking to see if timer has run out
       if (timerLength.current === 0) {
+        playSound("alarm");
         console.log("TIME OUT!");
         //Ending the interval timer
         setTime("00:00");
@@ -90,10 +92,12 @@ const Timer = () => {
   }, [timerActive]);
 
   const toggleTimer = () => {
+    playSound("click");
     setTimerActive((prev) => !prev);
   };
 
   const toggleMenu = () => {
+    playSound("click");
     console.log("Toggling the menu!");
     setSettingsVisible((prev) => !prev);
   };
