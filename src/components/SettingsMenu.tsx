@@ -1,5 +1,7 @@
-// import { useState } from "react";
+import { useContext, useState } from "react";
+import { TimerContext } from "../App";
 import styled from "styled-components";
+import { Settings } from "./Interfaces";
 
 // const [color, setColor] = useState("#f87070");
 
@@ -84,10 +86,45 @@ export const SettingsMenu = ({ toggle }) => {
     }
   `;
 
+  const MenuHeader = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  `;
+
+  const hadleSettingSettings = () => {
+    console.log("Saving settings!");
+    setSettings(tempSettings);
+    toggle();
+  };
+
+  const ExitButton = styled.div`
+
+    border: "2px solid black",
+    width: "30px",
+    height: "30px",
+    textAlign: "center",
+    font-size: 20rem;
+
+    &:hover{
+      cursor:pointer;
+    }
+  
+  `;
+
+  const { settings, setSettings } = useContext(TimerContext);
+  const prevSettings = settings;
+  const [tempSettings, setTempSettings] = useState<Settings>(settings);
+
   return (
     <MenuWrapper>
       <StyledMenu>
-        <h1>Settings:</h1>
+        <MenuHeader>
+          <h1>Settings:</h1>
+          <ExitButton onClick={toggle}>
+            <h3>X</h3>
+          </ExitButton>
+        </MenuHeader>
         <h3
           style={{
             textTransform: "uppercase",
@@ -99,17 +136,36 @@ export const SettingsMenu = ({ toggle }) => {
         <TimeSettingsWrapper>
           <SettingsWrapper>
             <span style={{ color: "gray", fontWeight: "500" }}>pomodoro</span>
-            <StyledInput type="number" min="0" value="25"></StyledInput>
+            <StyledInput
+              type="number"
+              min="0"
+              defaultValue={prevSettings.pomodoro}
+              onChange={(e) => {
+                setTempSettings((prev: Settings) => ({
+                  pomodoro: parseInt(e.target.value, 10),
+                  ...prev,
+                }));
+                console.log("Setting pomodoro time to: ", e.target.value);
+              }}
+            ></StyledInput>
           </SettingsWrapper>
           <SettingsWrapper>
             <span style={{ color: "gray", fontWeight: "500" }}>
               short break
             </span>
-            <StyledInput type="number" min="0" value="5"></StyledInput>
+            <StyledInput
+              type="number"
+              min="0"
+              value={prevSettings.short}
+            ></StyledInput>
           </SettingsWrapper>
           <SettingsWrapper>
             <span style={{ color: "gray", fontWeight: "500" }}>long break</span>
-            <StyledInput type="number" min="0" value="10"></StyledInput>
+            <StyledInput
+              type="number"
+              min="0"
+              value={prevSettings.long}
+            ></StyledInput>
           </SettingsWrapper>
         </TimeSettingsWrapper>
 
@@ -164,7 +220,7 @@ export const SettingsMenu = ({ toggle }) => {
           </div>
         </OtherSettingsWrapper>
       </StyledMenu>
-      <StyledButton onClick={toggle}>Apply</StyledButton>
+      <StyledButton onClick={() => hadleSettingSettings()}>Apply</StyledButton>
     </MenuWrapper>
   );
 };

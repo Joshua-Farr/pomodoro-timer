@@ -14,7 +14,7 @@ const Timer = () => {
   const [time, setTime] = useState("25:00");
   const { mode, setMode } = useContext(TimerContext);
   const [numDone, setNumDone] = useState(0);
-  const [settingsVisible, setSettingsVisible] = useState(true);
+  const [settingsVisible, setSettingsVisible] = useState(false);
 
   const interval = useRef(1);
   const seconds = useRef(0);

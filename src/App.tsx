@@ -1,11 +1,6 @@
 import Timer from "./components/Timer";
 import { createContext, useState } from "react";
-
-interface Settings {
-  pomodoro: number;
-  short: number;
-  long: number;
-}
+import { Settings } from "./Interfaces";
 
 export const TimerContext = createContext<{
   mode: number;
