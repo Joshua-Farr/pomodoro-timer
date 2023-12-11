@@ -103,7 +103,7 @@ export const SettingsMenu = ({ toggle }) => {
     border-radius: 50%;
     padding: none;
     margin: none;
-    &:hover {
+    F &:hover {
       cursor: pointer;
     }
   `;
@@ -141,7 +141,7 @@ export const SettingsMenu = ({ toggle }) => {
             <span style={{ color: "gray", fontWeight: "500" }}>pomodoro</span>
             <StyledInput
               type="number"
-              min="0"
+              min="1"
               value={tempSettings.pomodoro}
               onChange={(e) => {
                 console.log(
@@ -161,7 +161,7 @@ export const SettingsMenu = ({ toggle }) => {
             </span>
             <StyledInput
               type="number"
-              min="0"
+              min="1"
               value={tempSettings.short}
               onChange={(e) => {
                 console.log(
@@ -179,7 +179,7 @@ export const SettingsMenu = ({ toggle }) => {
             <span style={{ color: "gray", fontWeight: "500" }}>long break</span>
             <StyledInput
               type="number"
-              min="0"
+              min="1"
               value={tempSettings.long}
               onChange={(e) => {
                 console.log(

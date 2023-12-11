@@ -13,7 +13,7 @@ import { SettingsMenu } from "./SettingsMenu.tsx";
 const Timer = () => {
   const [timerActive, setTimerActive] = useState(false);
   const [time, setTime] = useState("25:00");
-  const { settings, setSettings } = useContext(TimerContext);
+  const { settings } = useContext(TimerContext);
   const { mode, setMode } = useContext(TimerContext);
   const [numDone, setNumDone] = useState(0);
   const [settingsVisible, setSettingsVisible] = useState(false);
@@ -39,6 +39,7 @@ const Timer = () => {
       console.log("Timer Length: ", timerLength.current);
       if (timerLength.current <= 0) {
         playSound("alarm");
+
         console.log("TIME OUT!");
         //Ending the interval timer
         setTime("00:00");
@@ -81,7 +82,7 @@ const Timer = () => {
       seconds.current = 0;
       setTime(`${settings.long}:00`);
     }
-  }, [mode]);
+  }, [mode, settings]);
 
   useEffect(() => {
     if (timerActive) {
@@ -107,19 +108,27 @@ const Timer = () => {
   return (
     <>
       <TimerWrapper>
-        <Title>pomodoro</Title>
-        <ModeToggle />
-        <StyledTimer onClick={() => toggleTimer()}>
-          {time}
-          <Typography>{timerActive === true ? `Pause` : `Start`}</Typography>
-          <Spinner percent={convertTimeToPercent(timerLength.current, mode)} />
-        </StyledTimer>
-        <SettingsIcon
-          style={{ marginTop: "1.75em", height: "35px", width: "35px" }}
-          onClick={() => {
-            setSettingsVisible((prev) => !prev);
-          }}
-        />
+        {!settingsVisible && (
+          <>
+            <Title>pomodoro</Title>
+            <ModeToggle />
+            <StyledTimer onClick={() => toggleTimer()}>
+              {time}
+              <Typography>
+                {timerActive === true ? `Pause` : `Start`}
+              </Typography>
+              <Spinner
+                percent={convertTimeToPercent(timerLength.current, mode)}
+              />
+            </StyledTimer>
+            <SettingsIcon
+              style={{ marginTop: "1.75em", height: "35px", width: "35px" }}
+              onClick={() => {
+                setSettingsVisible((prev) => !prev);
+              }}
+            />
+          </>
+        )}
         {settingsVisible && <SettingsMenu toggle={() => toggleMenu()} />}
       </TimerWrapper>
     </>
