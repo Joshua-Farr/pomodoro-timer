@@ -12,8 +12,8 @@ export const convertTimeToPercent = (
     timerTotal = settings.pomodoro;
   } else if (mode === 2) {
     timerTotal = settings.short;
-  } else {
-    timerTotal = 10;
+  } else if (mode === 3) {
+    timerTotal = settings.long;
   }
 
   return 100 - (totalTime / timerTotal) * 100;
