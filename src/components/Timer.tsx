@@ -70,8 +70,6 @@ const Timer = () => {
 
       setTime(formatToTime(timerLength.current));
     }, 1000);
-
-    return length;
   };
 
   //Changing the state for which time has been selected

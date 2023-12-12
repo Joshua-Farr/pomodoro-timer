@@ -5,7 +5,7 @@ import { Settings } from "../Interfaces";
 import CloseIcon from "@mui/icons-material/Close";
 
 interface SettingsMenuProps {
-  toggle: () => {};
+  toggle: () => void;
 }
 
 export const SettingsMenu: React.FC<SettingsMenuProps> = ({ toggle }) => {
