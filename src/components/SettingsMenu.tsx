@@ -4,7 +4,11 @@ import styled from "styled-components";
 import { Settings } from "../Interfaces";
 import CloseIcon from "@mui/icons-material/Close";
 
-export const SettingsMenu = ({ toggle }) => {
+interface SettingsMenuProps {
+  toggle: () => {};
+}
+
+export const SettingsMenu: React.FC<SettingsMenuProps> = ({ toggle }) => {
   const { settings, setSettings } = useContext(TimerContext);
   const [tempSettings, setTempSettings] = useState<Settings>(settings);
 
