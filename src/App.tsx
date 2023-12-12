@@ -5,7 +5,7 @@ import { Settings } from "./Interfaces";
 export const TimerContext = createContext<{
   mode: number;
   setMode: React.Dispatch<React.SetStateAction<number>>;
-  settings: { pomodoro: number; short: number; long: number };
+  settings: Settings;
   setSettings: React.Dispatch<React.SetStateAction<Settings>>;
 }>({
   mode: 1,
@@ -14,6 +14,7 @@ export const TimerContext = createContext<{
     pomodoro: 25,
     short: 5,
     long: 10,
+    numberCompleted: 0,
   },
   setSettings: () => {},
 });
@@ -24,6 +25,7 @@ function App() {
     pomodoro: 25,
     short: 5,
     long: 10,
+    numberCompleted: 0,
   });
 
   return (

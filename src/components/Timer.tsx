@@ -43,18 +43,27 @@ const Timer = () => {
         console.log("TIME OUT!");
         //Ending the interval timer
         setTime("00:00");
-        setTimerActive(false);
+        console.log("Completed: ", numDone);
         if (mode === 1) {
+          console.log("Mode is equal to 1!", mode);
           setNumDone((prev) => {
             return prev + 1;
           });
-          if (numDone % 3 === 0) {
+
+          console.log("Numdone has been incremented to: ", numDone);
+
+          if (numDone % 3 === 0 && numDone != 0) {
+            console.log("Switching to mode 3!");
             setMode(3);
           } // Forcing longer break after 3 regular pomodoros
           else {
+            console.log("Moving to small break!");
             setMode(2);
           }
+        } else if (mode === 2 || mode === 3) {
+          setMode(1); // Starting a new pomodoro after taking a break!
         }
+        setTimerActive(false);
         clearInterval(interval.current);
         return;
       }

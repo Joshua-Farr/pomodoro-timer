@@ -4,6 +4,10 @@ import styled from "styled-components";
 import { Settings } from "../Interfaces";
 import CloseIcon from "@mui/icons-material/Close";
 
+// interface SettingsMenuProps {
+//   toggle: () => {};
+// }
+
 export const SettingsMenu = ({ toggle }) => {
   const color = "#6ff2f8";
 
