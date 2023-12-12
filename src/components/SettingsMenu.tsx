@@ -4,12 +4,9 @@ import styled from "styled-components";
 import { Settings } from "../Interfaces";
 import CloseIcon from "@mui/icons-material/Close";
 
-// interface SettingsMenuProps {
-//   toggle: () => {};
-// }
-
 export const SettingsMenu = ({ toggle }) => {
-  const color = "#6ff2f8";
+  const { settings, setSettings } = useContext(TimerContext);
+  const [tempSettings, setTempSettings] = useState<Settings>(settings);
 
   const StyledMenu = styled.div`
     background-color: white;
@@ -17,6 +14,7 @@ export const SettingsMenu = ({ toggle }) => {
     width: 600px;
     border-radius: 25px;
     padding: 0.75em 2em;
+    font-family: ${settings.font};
   `;
 
   const StyledButton = styled.button`
@@ -78,7 +76,7 @@ export const SettingsMenu = ({ toggle }) => {
     height: 40px;
     width: 40px;
     color: black;
-    background-color: ${color};
+    background-color: ${settings.color};
     border-radius: 50%;
     display: flex;
     flex-direction: column;
@@ -111,9 +109,6 @@ export const SettingsMenu = ({ toggle }) => {
       cursor: pointer;
     }
   `;
-
-  const { settings, setSettings } = useContext(TimerContext);
-  const [tempSettings, setTempSettings] = useState<Settings>(settings);
 
   console.log(tempSettings);
 
@@ -198,52 +193,76 @@ export const SettingsMenu = ({ toggle }) => {
             ></StyledInput>
           </SettingsWrapper>
         </TimeSettingsWrapper>
-
+        {/* 
         <OtherSettingsWrapper>
           <h3 style={{ textTransform: "uppercase", letterSpacing: "1.5px" }}>
             Font
           </h3>
           <div style={{ display: "flex", gap: "1em" }}>
             <SettingCircle
+              style={{ background: "lightgray", fontFamily: "Archivo Narrow" }}
               onClick={() => {
                 console.log("Settings button clicked!");
+                setTempSettings((prev) => {
+                  return { ...prev, font: "Archivo Narrow" };
+                });
               }}
             >
               Aa
             </SettingCircle>
             <SettingCircle
+              style={{ background: "lightgray", fontFamily: "Kalnia" }}
               onClick={() => {
                 console.log("Settings button clicked!");
+                setTempSettings((prev) => {
+                  return { ...prev, font: "Kalnia" };
+                });
               }}
             >
               Aa
             </SettingCircle>
             <SettingCircle
+              style={{ background: "lightgray", fontFamily: "Montserrat" }}
               onClick={() => {
                 console.log("Settings button clicked!");
+                setTempSettings((prev) => {
+                  return { ...prev, font: "Montserrat" };
+                });
               }}
             >
               Aa
             </SettingCircle>
           </div>
-        </OtherSettingsWrapper>
+        </OtherSettingsWrapper> */}
         <OtherSettingsWrapper>
           <h3 style={{ textTransform: "uppercase", letterSpacing: "1.5px" }}>
             Color
           </h3>
           <div style={{ display: "flex", gap: "1em" }}>
             <SettingCircle
+              style={{ background: "#f87070" }}
               onClick={() => {
+                setTempSettings((prev) => {
+                  return { ...prev, color: "#f87070" };
+                });
                 console.log("Settings button clicked!");
               }}
             ></SettingCircle>
             <SettingCircle
+              style={{ background: "#6ff3f8" }}
               onClick={() => {
+                setTempSettings((prev) => {
+                  return { ...prev, color: "#6ff3f8" };
+                });
                 console.log("Settings button clicked!");
               }}
             ></SettingCircle>
             <SettingCircle
+              style={{ background: "#D981f9" }}
               onClick={() => {
+                setTempSettings((prev) => {
+                  return { ...prev, color: "#D981f9" };
+                });
                 console.log("Settings button clicked!");
               }}
             ></SettingCircle>

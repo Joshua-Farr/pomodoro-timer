@@ -2,7 +2,11 @@ interface SpinnerProps {
   percent: number;
 }
 
+import { useContext } from "react";
+import { TimerContext } from "../App";
+
 const Spinner: React.FC<SpinnerProps> = ({ percent }) => {
+  const { settings } = useContext(TimerContext);
   const calcOffset = (requirement: number) => {
     return 1100 * (requirement / 100);
   };
@@ -29,7 +33,7 @@ const Spinner: React.FC<SpinnerProps> = ({ percent }) => {
           width: "250px",
           height: "250px",
           fill: "none",
-          stroke: "#f7706f",
+          stroke: `${settings.color}`,
           strokeWidth: "20px",
           strokeDasharray: "1100",
           strokeDashoffset: `${calcOffset(percent)}`,

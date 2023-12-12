@@ -3,11 +3,12 @@ import { useContext } from "react";
 import { TimerContext } from "../App";
 
 const ModeToggle = () => {
+  const { settings } = useContext(TimerContext);
   const { mode, setMode } = useContext(TimerContext);
 
   const selectedStyles = {
     color: "#151932",
-    backgroundColor: " #f87070",
+    backgroundColor: `${settings.color}`,
     borderRadius: "25px",
     margin: "-1.25rem 0",
     marginLeft: `${mode === 1 ? "-1em" : "none"}`,

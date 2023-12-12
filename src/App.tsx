@@ -15,6 +15,8 @@ export const TimerContext = createContext<{
     short: 5,
     long: 10,
     numberCompleted: 0,
+    color: "#f7706f",
+    font: "",
   },
   setSettings: () => {},
 });
@@ -26,6 +28,8 @@ function App() {
     short: 5,
     long: 10,
     numberCompleted: 0,
+    color: "#f7706f",
+    font: "",
   });
 
   return (

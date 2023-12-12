@@ -116,7 +116,7 @@ const Timer = () => {
 
   return (
     <>
-      <TimerWrapper>
+      <TimerWrapper style={{ fontFamily: `${settings.font}` }}>
         {!settingsVisible && (
           <>
             <Title>pomodoro</Title>
