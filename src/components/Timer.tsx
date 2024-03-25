@@ -1,20 +1,22 @@
 import styled from "styled-components";
-import { useState, useRef, useContext, useEffect } from "react";
-import formatToTime from "../utils/FormatToTime";
-import ModeToggle from "./ModeToggle";
 import Spinner from "./Spinner.tsx";
-import { convertTimeToPercent } from "../utils/convertTimeToPercent.tsx";
+import ModeToggle from "./ModeToggle";
+import formatToTime from "../utils/FormatToTime";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { playSound } from "../utils/playSound.tsx";
-
 import { TimerContext } from "../App";
 import { SettingsMenu } from "./SettingsMenu.tsx";
+import { calculateMinutes } from "../utils/calculateMinutes.ts";
+import { calculateSeconds } from "../utils/calculateSeconds.ts";
+import { convertTimeToPercent } from "../utils/convertTimeToPercent.tsx";
+import { useState, useRef, useContext, useEffect } from "react";
 
 const Timer = () => {
-  const [timerActive, setTimerActive] = useState(false);
-  const [time, setTime] = useState("25:00");
   const { settings } = useContext(TimerContext);
   const { mode, setMode } = useContext(TimerContext);
+
+  const [timerActive, setTimerActive] = useState(false);
+  const [time, setTime] = useState("25:00");
   const [numDone, setNumDone] = useState(0);
   const [settingsVisible, setSettingsVisible] = useState(false);
 
@@ -38,7 +40,7 @@ const Timer = () => {
       timerLength.current = length - roundedTimeDiff / 60;
       console.log("Timer Length: ", timerLength.current);
       if (timerLength.current <= 0) {
-        playSound("alarm");
+        playSound("src/assets/alarm-clock-short-6402.mp3");
 
         console.log("TIME OUT!");
         //Ending the interval timer
@@ -68,7 +70,10 @@ const Timer = () => {
         return;
       }
 
-      setTime(formatToTime(timerLength.current));
+      const calculatedMin = calculateMinutes(timerLength.current);
+      const calculatedSeconds = calculateSeconds(timerLength.current);
+
+      setTime(formatToTime(calculatedMin, calculatedSeconds));
     }, 1000);
   };
 
@@ -94,21 +99,18 @@ const Timer = () => {
   useEffect(() => {
     if (timerActive) {
       startTimer(timerLength.current);
-      console.log("Timer is active!");
     } else {
-      console.log("timer is inactive!");
       clearInterval(interval.current);
     }
   }, [timerActive]);
 
   const toggleTimer = () => {
-    playSound("click");
+    playSound("src/assets/click_effect-86995.mp3");
     setTimerActive((prev) => !prev);
   };
 
   const toggleMenu = () => {
-    playSound("click");
-    console.log("Toggling the menu!");
+    playSound("src/assets/click_effect-86995.mp3");
     setSettingsVisible((prev) => !prev);
   };
 
@@ -125,7 +127,11 @@ const Timer = () => {
                 {timerActive === true ? `Pause` : `Start`}
               </Typography>
               <Spinner
-                percent={convertTimeToPercent(timerLength.current, mode)}
+                percent={convertTimeToPercent(
+                  timerLength.current,
+                  mode,
+                  settings
+                )}
               />
             </StyledTimer>
             <SettingsIcon

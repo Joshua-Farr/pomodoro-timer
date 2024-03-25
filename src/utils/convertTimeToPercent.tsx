@@ -1,20 +1,13 @@
-import { useContext } from "react";
-import { TimerContext } from "../App";
+import { calculatePercentage } from "./calculatePercentage";
+import { Settings } from "../Interfaces";
+import { getTotalTimeOnTimer } from "./getTotalTimeOnTimer";
 
 export const convertTimeToPercent = (
-  totalTime: number, // In minutes
-  mode: number
+  timeRemaining: number, // In minutes
+  mode: number,
+  settings: Settings
 ): number => {
-  const { settings } = useContext(TimerContext);
+  const startingTime = getTotalTimeOnTimer(mode, settings);
 
-  let timerTotal = 0;
-  if (mode === 1) {
-    timerTotal = settings.pomodoro;
-  } else if (mode === 2) {
-    timerTotal = settings.short;
-  } else if (mode === 3) {
-    timerTotal = settings.long;
-  }
-
-  return 100 - (totalTime / timerTotal) * 100;
+  return calculatePercentage(timeRemaining, startingTime);
 };
